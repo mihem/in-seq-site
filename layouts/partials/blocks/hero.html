@@ -1,0 +1,34 @@
+{{/* Hugo Blox: Hero (local override - full-width image) */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{ with $block.content.title }}
+  <h1 class="hero-title">{{ . | markdownify }}</h1>
+{{ end }}
+
+{{ with $block.content.text }}
+  <div class="hero-lead">{{ . | $page.RenderString | emojify }}</div>
+{{ end }}
+
+{{ if $block.content.image.filename }}
+<div class="row">
+  <div class="col-12">
+    {{- $image := resources.Get (path.Join "media" $block.content.image.filename) -}}
+    {{ if $image }}
+      {{ $isSVG := eq $image.MediaType.SubType "svg" }}
+      {{ if $isSVG -}}
+        <img src="{{ $image.RelPermalink }}" alt="{{ $block.content.title }}" style="width:100%; height:auto;">
+      {{- else }}
+        {{ $legacy_img := $image.Resize "1200x" }}
+        {{ $img_src_set := slice }}
+        {{ range slice 1200 800 400 }}
+          {{ $resized := ($image.Resize (printf "%dx" .)) }}
+          {{ $img_src_set = $img_src_set | append (printf "%s %dw" $resized.RelPermalink .) }}
+        {{ end }}
+        {{ $img_src_set = delimit $img_src_set "," }}
+        <img src="{{ $legacy_img.RelPermalink }}" srcset="{{ $img_src_set }}" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="{{ $block.content.title }}" style="width:100%; height:auto;">
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}
