@@ -1,6 +1,6 @@
 ---
 date: "2026-03-28T00:00:00Z"
-external_link: https://osmzhlab.uni-muenster.de/shiny/cerebro_pns_atlas/
+external_link: https://osmzhlab.uni-muenster.de/shiny/cerebro_in_seq/
 image:
   caption: Single cell transcriptomic dataset
   focal_point: Smart
