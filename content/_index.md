@@ -5,11 +5,12 @@ date: 2026-03-28
 type: landing
 
 sections:
-  - block: markdown
+  - block: hero
     content:
       title:
-      text: |
-        <img src="/media/scheme_manuscript.jpg" style="width:100%; height:auto;">
+      image:
+        filename: scheme_manuscript.jpg
+      text:
 
   - block: markdown
     content:
